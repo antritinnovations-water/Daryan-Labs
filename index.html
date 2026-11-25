@@ -1,0 +1,643 @@
+<title>Tidewell Water</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Tidewell designs and installs home water purification systems: reverse osmosis, whole-home filtration and countertop units.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a single measured column; the hero is a lab readout, sections alternate between plain ground and a deep "reservoir" band. */
+:root {
+  --ground: #f3f7f7;
+  --surface: #ffffff;
+  --ink: #0d2a31;
+  --ink-soft: #4a6168;
+  --line: #d3e0e1;
+  --accent: #0a8f9c;
+  --accent-ink: #ffffff;
+  --mineral: #b5682c;
+  --deep: #0b2329;
+  --deep-ink: #e4f1f2;
+  --deep-soft: #93b3b8;
+  --good: #1f8a55;
+
+  --f-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --s-1: clamp(2.4rem, 1.4rem + 4.2vw, 4.6rem);
+  --s-2: clamp(1.7rem, 1.2rem + 2vw, 2.6rem);
+  --s-3: 1.25rem;
+  --s-body: 1.0625rem;
+  --s-small: 0.875rem;
+  --wrap: 72rem;
+  --radius: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #0a1b1f; --surface: #11262b; --ink: #e2eff0; --ink-soft: #9ab4b8;
+    --line: #20393f; --accent: #2cc2cf; --accent-ink: #04191c; --mineral: #e0975c;
+    --deep: #06292f; --deep-ink: #e4f1f2; --deep-soft: #8fb5ba; --good: #4cc98a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --ground: #0a1b1f; --surface: #11262b; --ink: #e2eff0; --ink-soft: #9ab4b8;
+  --line: #20393f; --accent: #2cc2cf; --accent-ink: #04191c; --mineral: #e0975c;
+  --deep: #06292f; --deep-ink: #e4f1f2; --deep-soft: #8fb5ba; --good: #4cc98a;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before { animation: none !important; transition: none !important; } }
+body {
+  background: var(--ground); color: var(--ink);
+  font: 400 var(--s-body)/1.6 var(--f-body);
+}
+body::before {
+  content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
+  z-index: 10; background: var(--ground);
+}
+a { color: inherit; }
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.05; }
+h1 { font-size: var(--s-1); font-weight: 800; letter-spacing: -0.02em; }
+h2 { font-size: var(--s-2); font-weight: 800; letter-spacing: -0.015em; }
+h3 { font-size: var(--s-3); font-weight: 600; }
+p { margin: 0; }
+.wrap {
+  max-width: var(--wrap); margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.band { padding-block: clamp(3.5rem, 8vw, 6.5rem); }
+.eyebrow {
+  font: 500 0.75rem/1 var(--f-mono); letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--accent);
+}
+.lede { color: var(--ink-soft); max-width: 36rem; font-size: 1.125rem; }
+.mono { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font: 700 1rem/1 var(--f-body); text-decoration: none; cursor: pointer;
+  padding: 0.9rem 1.3rem; border-radius: 999px; border: 2px solid var(--accent);
+  background: var(--accent); color: var(--accent-ink);
+  transition: transform .15s ease, background .15s ease;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn.ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+.btn.ghost:hover { border-color: var(--accent); }
+
+/* Header */
+header.site {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  background: color-mix(in srgb, var(--ground) 88%, transparent);
+  backdrop-filter: blur(10px); border-bottom: 1px solid var(--line);
+}
+header.site .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: 0.85rem; }
+.brand { display: flex; align-items: center; gap: 0.55rem; font: 800 1.25rem/1 var(--f-display); text-decoration: none; }
+.brand svg { flex: none; }
+nav.links { display: flex; gap: 1.5rem; font-size: 0.95rem; }
+nav.links a { text-decoration: none; color: var(--ink-soft); }
+nav.links a:hover { color: var(--ink); }
+header .btn { padding: 0.65rem 1rem; font-size: 0.9rem; }
+@media (max-width: 760px) { nav.links { display: none; } }
+
+/* Hero */
+.hero { padding-block: clamp(3rem, 7vw, 5.5rem) clamp(3rem, 6vw, 4.5rem); }
+.hero .wrap { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
+.hero-copy { display: grid; gap: 1.4rem; min-width: 0; }
+.hero h1 em { font-style: normal; color: var(--accent); }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.hero-facts { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; font-size: var(--s-small); color: var(--ink-soft); }
+.hero-facts span::before { content: "✓ "; color: var(--good); font-weight: 700; }
+@media (max-width: 860px) { .hero .wrap { grid-template-columns: 1fr; } }
+
+/* Meter readout */
+.meter {
+  background: var(--deep); color: var(--deep-ink); border-radius: 18px;
+  padding: 1.5rem; display: grid; gap: 1.25rem; min-width: 0;
+  box-shadow: 0 30px 60px -30px rgba(6, 40, 46, 0.55);
+}
+.meter-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; font: 500 0.75rem/1 var(--f-mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--deep-soft); }
+.meter-head .live::before { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #4cd9a0; margin-right: 6px; animation: blink 2s infinite; }
+@keyframes blink { 50% { opacity: 0.3; } }
+.readings { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.reading { display: grid; gap: 0.3rem; }
+.reading .lbl { font-size: 0.8rem; color: var(--deep-soft); }
+.reading .val { font: 500 clamp(2.4rem, 2rem + 2vw, 3.4rem)/1 var(--f-mono); font-variant-numeric: tabular-nums; }
+.reading .val small { font-size: 0.9rem; color: var(--deep-soft); margin-left: 0.25rem; }
+.reading.before .val { color: #f0a868; }
+.reading.after .val { color: #5fe0e9; }
+.stages-mini { display: grid; gap: 0.55rem; }
+.stage-row { display: grid; grid-template-columns: 7.5rem 1fr 3.2rem; align-items: center; gap: 0.75rem; font-size: 0.8rem; }
+.stage-row .name { color: var(--deep-soft); }
+.stage-row .bar { height: 8px; border-radius: 99px; background: rgba(255,255,255,0.08); overflow: hidden; }
+.stage-row .bar i { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #f0a868, #5fe0e9); transform-origin: left; animation: fill 1.4s cubic-bezier(.2,.7,.2,1) both; }
+.stage-row .ppm { text-align: right; font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+@keyframes fill { from { transform: scaleX(1); filter: saturate(0.4); } }
+.meter-foot { font-size: 0.78rem; color: var(--deep-soft); border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem; }
+
+/* Stages */
+.section-head { display: grid; gap: 0.9rem; margin-bottom: 2.75rem; }
+.stages { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); border-top: 2px solid var(--ink); }
+.stages li { padding: 1.25rem 1.1rem 0 0; display: grid; gap: 0.6rem; align-content: start; min-width: 0; }
+.stages li + li { padding-left: 1.1rem; border-left: 1px solid var(--line); }
+.stages .num { font: 500 0.8rem/1 var(--f-mono); color: var(--accent); }
+.stages .spec { font: 500 0.78rem/1.3 var(--f-mono); color: var(--mineral); }
+.stages p { font-size: 0.95rem; color: var(--ink-soft); }
+@media (max-width: 900px) {
+  .stages { grid-template-columns: 1fr 1fr; row-gap: 1.75rem; }
+  .stages li, .stages li + li { padding: 1rem 0 0; border-left: 0; border-top: 1px solid var(--line); }
+  .stages { border-top: 0; column-gap: 1.5rem; }
+}
+@media (max-width: 520px) { .stages { grid-template-columns: 1fr; } }
+
+/* Systems */
+.systems { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+.system {
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 1.6rem; display: grid; gap: 1rem; grid-template-rows: auto auto 1fr auto; min-width: 0;
+}
+.system.featured { border: 2px solid var(--accent); }
+.system .tag { justify-self: start; font: 500 0.7rem/1 var(--f-mono); letter-spacing: 0.08em; text-transform: uppercase; padding: 0.35rem 0.55rem; border-radius: 4px; background: color-mix(in srgb, var(--accent) 14%, transparent); color: var(--accent); }
+.system .tag.plain { background: color-mix(in srgb, var(--ink) 7%, transparent); color: var(--ink-soft); }
+.system dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 0.45rem 1rem; font-size: 0.9rem; border-top: 1px solid var(--line); padding-top: 1rem; align-content: start; }
+.system dt { color: var(--ink-soft); }
+.system dd { margin: 0; text-align: right; font-family: var(--f-mono); font-size: 0.85rem; }
+.system .price { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.system .price strong { font: 800 1.9rem/1 var(--f-display); }
+.system .price span { font-size: var(--s-small); color: var(--ink-soft); }
+.system p.desc { color: var(--ink-soft); font-size: 0.95rem; }
+@media (max-width: 900px) { .systems { grid-template-columns: 1fr; max-width: 32rem; } }
+
+/* Finder (deep band) */
+.deep { background: var(--deep); color: var(--deep-ink); }
+.deep .lede { color: var(--deep-soft); }
+.deep .eyebrow { color: #5fe0e9; }
+.finder { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 4rem); align-items: start; }
+.finder form { display: grid; gap: 1.5rem; min-width: 0; }
+.field { display: grid; gap: 0.6rem; border: 0; margin: 0; padding: 0; min-width: 0; }
+.field legend, .field > label { font-weight: 700; padding: 0; margin-bottom: 0.1rem; }
+.chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.chips input { position: absolute; opacity: 0; pointer-events: none; }
+.chips label {
+  cursor: pointer; padding: 0.55rem 0.9rem; border-radius: 999px; font-size: 0.92rem;
+  border: 1px solid rgba(255,255,255,0.18); color: var(--deep-ink); transition: background .15s, border-color .15s;
+}
+.chips label:hover { border-color: #5fe0e9; }
+.chips input:checked + label { background: #5fe0e9; border-color: #5fe0e9; color: #04191c; font-weight: 700; }
+.chips input:focus-visible + label { outline: 3px solid #5fe0e9; outline-offset: 2px; }
+.range-row { display: flex; align-items: center; gap: 1rem; }
+.range-row input { flex: 1; accent-color: #5fe0e9; min-width: 0; }
+.range-row output { font-family: var(--f-mono); font-variant-numeric: tabular-nums; min-width: 4.5rem; text-align: right; }
+.hint { font-size: 0.82rem; color: var(--deep-soft); }
+.result {
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px; padding: 1.75rem; display: grid; gap: 1rem; min-width: 0;
+}
+.result .eyebrow { color: var(--deep-soft); }
+.result h3 { font-size: 1.8rem; font-weight: 800; }
+.result ul { margin: 0; padding-left: 1.1rem; display: grid; gap: 0.35rem; color: var(--deep-soft); }
+.result .est { display: flex; gap: 2rem; flex-wrap: wrap; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 1rem; }
+.result .est div { display: grid; gap: 0.2rem; }
+.result .est span { font-size: 0.78rem; color: var(--deep-soft); }
+.result .est strong { font: 500 1.3rem/1 var(--f-mono); }
+.result .btn { justify-self: start; background: #5fe0e9; border-color: #5fe0e9; color: #04191c; }
+@media (max-width: 860px) { .finder { grid-template-columns: 1fr; } }
+
+/* Service */
+.service { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(2rem, 5vw, 4rem); align-items: start; }
+.service .section-head { margin-bottom: 0; }
+.schedule { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+.schedule th, .schedule td { text-align: left; padding: 0.85rem 0.75rem 0.85rem 0; border-bottom: 1px solid var(--line); }
+.schedule th { font: 500 0.72rem/1 var(--f-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); }
+.schedule td.mono { white-space: nowrap; }
+.table-scroll { overflow-x: auto; min-width: 0; }
+@media (max-width: 860px) { .service { grid-template-columns: 1fr; } }
+
+/* FAQ */
+.faq { display: grid; max-width: 48rem; border-top: 1px solid var(--line); }
+.faq details { border-bottom: 1px solid var(--line); }
+.faq summary { cursor: pointer; list-style: none; padding: 1.2rem 0; font: 600 1.15rem/1.3 var(--f-display); display: flex; justify-content: space-between; gap: 1rem; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; font-family: var(--f-mono); color: var(--accent); transition: transform .2s; }
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq details p { padding-bottom: 1.25rem; color: var(--ink-soft); max-width: 40rem; }
+
+/* Contact */
+.contact { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(2rem, 5vw, 4rem); align-items: start; }
+.contact-info { display: grid; gap: 1.5rem; min-width: 0; }
+.contact-info dl { margin: 0; display: grid; gap: 1rem; }
+.contact-info dt { font: 500 0.72rem/1 var(--f-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 0.3rem; }
+.contact-info dd { margin: 0; font-weight: 700; user-select: all; }
+.contact-form { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(1.25rem, 3vw, 2rem); display: grid; gap: 1.1rem; min-width: 0; }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+@media (max-width: 560px) { .row2 { grid-template-columns: 1fr; } }
+.contact-form label { display: grid; gap: 0.4rem; font-size: 0.9rem; font-weight: 700; min-width: 0; }
+.contact-form input, .contact-form select, .contact-form textarea {
+  font: 400 1rem/1.4 var(--f-body); color: var(--ink); background: var(--ground);
+  border: 1px solid var(--line); border-radius: 8px; padding: 0.75rem 0.85rem; width: 100%;
+}
+.contact-form input:focus, .contact-form select:focus, .contact-form textarea:focus { outline: 2px solid var(--accent); outline-offset: 0; border-color: var(--accent); }
+.contact-form textarea { resize: vertical; min-height: 6rem; }
+.form-note { font-size: 0.9rem; color: var(--good); font-weight: 700; }
+.form-err { font-size: 0.9rem; color: var(--mineral); font-weight: 700; }
+@media (max-width: 860px) { .contact { grid-template-columns: 1fr; } }
+
+/* Footer */
+footer.site { border-top: 1px solid var(--line); padding-block: 2.5rem; font-size: var(--s-small); color: var(--ink-soft); }
+footer.site .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem 2rem; }
+footer.site nav { display: flex; flex-wrap: wrap; gap: 1.25rem; }
+footer.site a { text-decoration: none; }
+footer.site a:hover { color: var(--ink); }
+</style>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Tidewell home">
+      <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+        <path d="M13 2 C13 2 4 12 4 17 a9 9 0 0 0 18 0 C22 12 13 2 13 2 Z" fill="var(--accent)"/>
+        <path d="M8 17 h10 M9.5 20.5 h7" stroke="var(--ground)" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+      </svg>
+      Tidewell
+    </a>
+    <nav class="links" aria-label="Main">
+      <a href="#how">How it works</a>
+      <a href="#systems">Systems</a>
+      <a href="#finder">Find your system</a>
+      <a href="#service">Service</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="btn" href="#contact">Free water test</a>
+  </div>
+</header>
+
+<main id="top">
+  <!-- Hero -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <span class="eyebrow">Home water purification</span>
+        <h1>From 312 ppm at the tap to <em>9 ppm</em> in your glass.</h1>
+        <p class="lede">Tidewell tests your water, designs a filtration system around what is actually in it, and installs it in one visit. Then we change the filters for you, on schedule, for as long as you own it.</p>
+        <div class="hero-actions">
+          <a class="btn" href="#contact">Book a free water test</a>
+          <a class="btn ghost" href="#finder">Find your system</a>
+        </div>
+        <div class="hero-facts">
+          <span>NSF/ANSI 58 &amp; 53 certified</span>
+          <span>Installed in under 3 hours</span>
+          <span>10-year tank warranty</span>
+        </div>
+      </div>
+
+      <aside class="meter" aria-label="Sample water test readout">
+        <div class="meter-head"><span class="live">Sample test · Kitchen tap</span><span>TDS</span></div>
+        <div class="readings">
+          <div class="reading before"><span class="lbl">Before</span><span class="val">312<small>ppm</small></span></div>
+          <div class="reading after"><span class="lbl">After Tidewell RO-5</span><span class="val">9<small>ppm</small></span></div>
+        </div>
+        <div class="stages-mini" role="list">
+          <div class="stage-row" role="listitem"><span class="name">Sediment 5 µm</span><span class="bar"><i style="width:94%"></i></span><span class="ppm">294</span></div>
+          <div class="stage-row" role="listitem"><span class="name">Carbon block</span><span class="bar"><i style="width:86%;animation-delay:.15s"></i></span><span class="ppm">268</span></div>
+          <div class="stage-row" role="listitem"><span class="name">Carbon polish</span><span class="bar"><i style="width:82%;animation-delay:.3s"></i></span><span class="ppm">256</span></div>
+          <div class="stage-row" role="listitem"><span class="name">RO membrane</span><span class="bar"><i style="width:4%;animation-delay:.45s"></i></span><span class="ppm">12</span></div>
+          <div class="stage-row" role="listitem"><span class="name">Mineral finish</span><span class="bar"><i style="width:3%;animation-delay:.6s"></i></span><span class="ppm">9</span></div>
+        </div>
+        <p class="meter-foot">Illustrative reading for a typical municipal supply. Your free test measures TDS, hardness, chlorine, pH and lead at your own tap.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="band" id="how" style="padding-top:clamp(2rem,4vw,3rem)">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">How it works</span>
+        <h2>Five stages, each with one job</h2>
+        <p class="lede">Water passes through every stage in order. Each one removes something the next stage would struggle with, which is why the membrane lasts years instead of months.</p>
+      </div>
+      <ol class="stages">
+        <li><span class="num">Stage 1</span><h3>Sediment</h3><span class="spec">5 micron polypropylene</span><p>Catches sand, rust and scale flakes from old pipes before they can clog anything downstream.</p></li>
+        <li><span class="num">Stage 2</span><h3>Activated carbon</h3><span class="spec">GAC, coconut shell</span><p>Absorbs chlorine and chloramine, which would otherwise damage the RO membrane.</p></li>
+        <li><span class="num">Stage 3</span><h3>Carbon block</h3><span class="spec">1 micron, NSF 53</span><p>Removes VOCs, pesticides, and the taste and smell people notice most.</p></li>
+        <li><span class="num">Stage 4</span><h3>RO membrane</h3><span class="spec">0.0001 micron, 75 GPD</span><p>Rejects up to 97% of dissolved solids, including lead, arsenic, fluoride, nitrates and PFAS.</p></li>
+        <li><span class="num">Stage 5</span><h3>Mineral finish</h3><span class="spec">Calcium &amp; magnesium</span><p>Adds back a little mineral content and lifts pH to around 7.5, so the water tastes crisp, not flat.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Systems -->
+  <section class="band" id="systems" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Systems</span>
+        <h2>Three systems, sized to your home</h2>
+      </div>
+      <div class="systems">
+        <article class="system">
+          <span class="tag plain">Renters &amp; small kitchens</span>
+          <h3>Countertop C-3</h3>
+          <p class="desc">Sits beside the sink and connects to the faucet with a diverter. No drilling, moves with you.</p>
+          <dl>
+            <dt>Stages</dt><dd>3</dd>
+            <dt>Flow</dt><dd>0.5 gal/min</dd>
+            <dt>Filter life</dt><dd>6 months</dd>
+            <dt>Removes</dt><dd>Chlorine, taste, lead</dd>
+          </dl>
+          <div class="price"><strong>$349</strong><span>Self-install, ships in 2 days</span></div>
+        </article>
+        <article class="system featured">
+          <span class="tag">Most chosen</span>
+          <h3>Under-sink RO-5</h3>
+          <p class="desc">The five-stage system above, with a dedicated faucet and a 3.2 gallon tank hidden in the cabinet.</p>
+          <dl>
+            <dt>Stages</dt><dd>5</dd>
+            <dt>Output</dt><dd>75 gal/day</dd>
+            <dt>Filter life</dt><dd>6–24 months</dd>
+            <dt>Removes</dt><dd>Up to 97% TDS</dd>
+          </dl>
+          <div class="price"><strong>$1,190</strong><span>Installed, includes first year of filters</span></div>
+        </article>
+        <article class="system">
+          <span class="tag plain">Hard water &amp; wells</span>
+          <h3>Whole-home WH-2</h3>
+          <p class="desc">Treats every tap and shower at the point of entry. Pairs with an RO-5 for drinking water.</p>
+          <dl>
+            <dt>Stages</dt><dd>2 + softener</dd>
+            <dt>Flow</dt><dd>15 gal/min</dd>
+            <dt>Media life</dt><dd>5–10 years</dd>
+            <dt>Removes</dt><dd>Hardness, iron, chlorine</dd>
+          </dl>
+          <div class="price"><strong>$3,450</strong><span>Installed, permit included</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Finder -->
+  <section class="band deep" id="finder">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Find your system</span>
+        <h2>Tell us about your water</h2>
+        <p class="lede">Three questions. We'll recommend a starting point, and the free in-home test confirms it.</p>
+      </div>
+      <div class="finder">
+        <form id="finder-form" aria-describedby="finder-out">
+          <fieldset class="field">
+            <legend>Where does your water come from?</legend>
+            <div class="chips">
+              <input type="radio" name="source" id="src-city" value="city" checked><label for="src-city">City supply</label>
+              <input type="radio" name="source" id="src-well" value="well"><label for="src-well">Private well</label>
+              <input type="radio" name="source" id="src-unsure" value="unsure"><label for="src-unsure">Not sure</label>
+            </div>
+          </fieldset>
+          <fieldset class="field">
+            <legend>What bothers you about it?</legend>
+            <div class="chips">
+              <input type="checkbox" name="concern" id="c-taste" value="taste" checked><label for="c-taste">Taste or smell</label>
+              <input type="checkbox" name="concern" id="c-scale" value="scale"><label for="c-scale">White scale on fixtures</label>
+              <input type="checkbox" name="concern" id="c-lead" value="lead"><label for="c-lead">Lead or old pipes</label>
+              <input type="checkbox" name="concern" id="c-pfas" value="pfas"><label for="c-pfas">PFAS / nitrates</label>
+              <input type="checkbox" name="concern" id="c-stain" value="stain"><label for="c-stain">Orange stains</label>
+            </div>
+          </fieldset>
+          <div class="field">
+            <label for="people">People in your home</label>
+            <div class="range-row">
+              <input type="range" id="people" min="1" max="8" value="3">
+              <output id="people-out" for="people">3 people</output>
+            </div>
+            <span class="hint">Used to size the tank and estimate filter costs.</span>
+          </div>
+        </form>
+
+        <div class="result" id="finder-out" aria-live="polite">
+          <span class="eyebrow">Our starting recommendation</span>
+          <h3 id="rec-name">Under-sink RO-5</h3>
+          <p id="rec-why">Removes the chlorine taste from city water and filters dissolved solids down to single digits.</p>
+          <ul id="rec-list"></ul>
+          <div class="est">
+            <div><span>Installed price</span><strong id="rec-price">$1,190</strong></div>
+            <div><span>Filters per year</span><strong id="rec-filters">$140</strong></div>
+            <div><span>Drinking water / day</span><strong id="rec-gal">2.4 gal</strong></div>
+          </div>
+          <a class="btn" href="#contact" id="rec-cta">Book a test for this system</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service -->
+  <section class="band" id="service">
+    <div class="wrap service">
+      <div class="section-head">
+        <span class="eyebrow">Filter service plan</span>
+        <h2>We remember the filters so you don't have to</h2>
+        <p class="lede">A technician comes out on schedule, swaps the cartridges, sanitizes the housings and re-tests your water. You get the reading by text the same day.</p>
+        <div><a class="btn ghost" href="#contact">Ask about the plan</a></div>
+      </div>
+      <div class="table-scroll">
+        <table class="schedule">
+          <thead><tr><th>Part</th><th>Replaced every</th><th>Included in plan</th></tr></thead>
+          <tbody>
+            <tr><td>Sediment cartridge</td><td class="mono">6 months</td><td>Yes</td></tr>
+            <tr><td>Carbon cartridges (×2)</td><td class="mono">6–12 months</td><td>Yes</td></tr>
+            <tr><td>RO membrane</td><td class="mono">24 months</td><td>Yes</td></tr>
+            <tr><td>Mineral cartridge</td><td class="mono">12 months</td><td>Yes</td></tr>
+            <tr><td>Tank &amp; faucet</td><td class="mono">10-yr warranty</td><td>Repairs covered</td></tr>
+            <tr><td><strong>Plan price</strong></td><td class="mono"><strong>$14 / month</strong></td><td>Cancel anytime</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="band" id="faq" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Questions</span>
+        <h2>Before you book</h2>
+      </div>
+      <div class="faq">
+        <details open>
+          <summary>What is TDS, and what's a good number?</summary>
+          <p>Total dissolved solids is everything dissolved in your water, measured in parts per million (ppm). Most city water reads 150–400 ppm. A well-tuned RO system brings it under 20 ppm. A low number doesn't prove water is safe on its own, which is why our test also checks lead, chlorine, hardness and pH.</p>
+        </details>
+        <details>
+          <summary>Does reverse osmosis waste a lot of water?</summary>
+          <p>Our RO-5 uses a permeate pump that brings the ratio to about 1 gallon of drain water for every gallon of drinking water. Older systems ran closer to 4:1.</p>
+        </details>
+        <details>
+          <summary>Will it remove the minerals I want?</summary>
+          <p>The membrane removes nearly everything, so stage five adds calcium and magnesium back. Most people say the water tastes better than bottled.</p>
+        </details>
+        <details>
+          <summary>How long does installation take?</summary>
+          <p>Under-sink systems take about 2 hours. Whole-home systems usually take half a day and may need a short water shut-off. We clean up and haul away the packaging.</p>
+        </details>
+        <details>
+          <summary>Is the water test really free?</summary>
+          <p>Yes. A technician tests at your tap, explains the results, and leaves a written report whether or not you buy anything.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="band" id="contact" style="padding-top:0">
+    <div class="wrap contact">
+      <div class="contact-info">
+        <div class="section-head" style="margin-bottom:0">
+          <span class="eyebrow">Free water test</span>
+          <h2>Book a 30-minute test at your tap</h2>
+          <p class="lede">Pick a time that works and we'll confirm within one business day.</p>
+        </div>
+        <dl>
+          <div><dt>Phone</dt><dd>(555) 014-2210</dd></div>
+          <div><dt>Email</dt><dd>hello@tidewell.example</dd></div>
+          <div><dt>Hours</dt><dd>Mon–Sat, 8am–6pm</dd></div>
+        </dl>
+      </div>
+      <form class="contact-form" id="contact-form" novalidate>
+        <div class="row2">
+          <label for="f-name">Name<input id="f-name" name="name" autocomplete="name" required></label>
+          <label for="f-phone">Phone<input id="f-phone" name="phone" type="tel" autocomplete="tel" required></label>
+        </div>
+        <label for="f-email">Email<input id="f-email" name="email" type="email" autocomplete="email" required></label>
+        <div class="row2">
+          <label for="f-zip">ZIP code<input id="f-zip" name="zip" inputmode="numeric" autocomplete="postal-code" maxlength="10"></label>
+          <label for="f-time">Preferred time
+            <select id="f-time" name="time">
+              <option>Weekday morning</option>
+              <option>Weekday afternoon</option>
+              <option>Saturday</option>
+            </select>
+          </label>
+        </div>
+        <label for="f-system">Interested in
+          <select id="f-system" name="system">
+            <option>Not sure yet</option>
+            <option>Countertop C-3</option>
+            <option>Under-sink RO-5</option>
+            <option>Whole-home WH-2</option>
+          </select>
+        </label>
+        <label for="f-notes">Anything we should know?<textarea id="f-notes" name="notes" placeholder="e.g. house built in 1962, water tastes metallic"></textarea></label>
+        <button class="btn" type="submit" style="justify-self:start">Request my test</button>
+        <p id="form-msg" role="status" hidden></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span>© 2026 Tidewell Water. Sample site.</span>
+    <nav aria-label="Footer">
+      <a href="#how">How it works</a>
+      <a href="#systems">Systems</a>
+      <a href="#service">Service plan</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const form = document.getElementById('finder-form');
+  const people = document.getElementById('people');
+  const peopleOut = document.getElementById('people-out');
+  const $ = id => document.getElementById(id);
+  const systemSelect = $('f-system');
+
+  const SYSTEMS = {
+    c3:  { name: 'Countertop C-3', price: 349, filters: 90 },
+    ro5: { name: 'Under-sink RO-5', price: 1190, filters: 140 },
+    wh2: { name: 'Whole-home WH-2 + RO-5', price: 4640, filters: 220 },
+  };
+
+  function recommend() {
+    const source = form.querySelector('input[name=source]:checked').value;
+    const concerns = [...form.querySelectorAll('input[name=concern]:checked')].map(i => i.value);
+    const n = Number(people.value);
+    peopleOut.textContent = n + (n === 1 ? ' person' : ' people');
+
+    let key = 'ro5';
+    const notes = [];
+    const wholeHome = source === 'well' || concerns.includes('scale') || concerns.includes('stain');
+    const needsRO = concerns.includes('lead') || concerns.includes('pfas') || source === 'well';
+
+    if (wholeHome) {
+      key = 'wh2';
+      if (concerns.includes('scale')) notes.push('Softener stops scale on taps, showers and your water heater');
+      if (concerns.includes('stain') || source === 'well') notes.push('Iron filter removes the orange staining common with well water');
+      notes.push('RO-5 at the kitchen sink handles drinking and cooking water');
+    } else if (!needsRO && concerns.length <= 1 && n <= 2) {
+      key = 'c3';
+      notes.push('Carbon filtration removes chlorine taste and smell');
+      notes.push('No installation, works with most standard faucets');
+    } else {
+      notes.push('Carbon stages remove chlorine taste and smell');
+      if (concerns.includes('lead')) notes.push('Certified to NSF 53 and 58 for lead reduction');
+      if (concerns.includes('pfas')) notes.push('RO membrane reduces PFAS and nitrates');
+      notes.push('Dedicated faucet with 75 gallons per day of output');
+    }
+    if (source === 'unsure') notes.push('Our test will confirm your supply type before you commit');
+
+    const s = SYSTEMS[key];
+    const filters = Math.round(s.filters * (n > 4 ? 1.35 : 1));
+    const why = {
+      c3: 'A simple carbon filter covers taste and chlorine for a small household.',
+      ro5: 'Reverse osmosis covers taste plus the contaminants you can\'t see, such as lead and PFAS.',
+      wh2: 'Hardness and iron affect every tap, so treat the water where it enters the house.',
+    }[key];
+
+    $('rec-name').textContent = s.name;
+    $('rec-why').textContent = why;
+    $('rec-list').replaceChildren(...notes.map(t => Object.assign(document.createElement('li'), { textContent: t })));
+    $('rec-price').textContent = '$' + s.price.toLocaleString('en-US');
+    $('rec-filters').textContent = '$' + filters;
+    $('rec-gal').textContent = (n * 0.8).toFixed(1) + ' gal';
+    $('rec-cta').dataset.system = key === 'wh2' ? 'Whole-home WH-2' : s.name;
+  }
+
+  form.addEventListener('input', recommend);
+  form.addEventListener('submit', e => e.preventDefault());
+  recommend();
+
+  $('rec-cta').addEventListener('click', e => {
+    const want = e.currentTarget.dataset.system;
+    [...systemSelect.options].forEach(o => { if (o.text === want) systemSelect.value = o.value; });
+  });
+
+  const contact = $('contact-form');
+  const msg = $('form-msg');
+  contact.addEventListener('submit', e => {
+    e.preventDefault();
+    const missing = ['f-name', 'f-phone', 'f-email'].filter(id => !$(id).value.trim());
+    const email = $('f-email').value.trim();
+    if (missing.length) {
+      msg.className = 'form-err';
+      msg.textContent = 'Add your name, phone and email so we can confirm the appointment.';
+      msg.hidden = false;
+      $(missing[0]).focus();
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      msg.className = 'form-err';
+      msg.textContent = 'That email address looks incomplete. Check it and try again.';
+      msg.hidden = false;
+      $('f-email').focus();
+      return;
+    }
+    msg.className = 'form-note';
+    msg.textContent = 'Thanks, ' + $('f-name').value.trim().split(' ')[0] + '. This is a demo site, so no request was sent. Connect the form to your booking system to go live.';
+    msg.hidden = false;
+  });
+})();
+</script>
